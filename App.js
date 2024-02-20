@@ -26,7 +26,7 @@ export default function App() {
         behavior={Platform.OS === 'ios' ? "padding" : "height"}
         style={styles.writeTaskWrapper}
       >
-        <TextInput style={styles.input}  placeholder={'Escreva um atarefa'} />
+        <TextInput style={styles.input}  placeholder={'Escreva uma tarefa'} />
         <TouchableOpacity>
           <View style={styles.addWrapper}>
             <Text style={styles.addText}>+</Text>
@@ -54,6 +54,37 @@ const styles = StyleSheet.create({
   },
   items: {
     marginTop: 30,
+  },
+  writeTaskWrapper: {
+    position: 'absolute',
+    bottom: 60,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  input: {
+    paddingVertical: 15,
+    backgroundColor: '#FFF',
+    borderRadius: 60,
+    borderColor: '#C0C0C0',
+    paddingHorizontal: 15,
+    width: 250,
+    
+    
+  },
+  addWrapper: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#FFF',
+    borderRadius: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 1
+  },
+  addText: {
+    fontSize: 30,
+    color: '#55BCF6'
   },
 
 });

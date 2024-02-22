@@ -1,5 +1,5 @@
-import React, {useState,} from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import Task from './components/Task';
 
@@ -9,9 +9,17 @@ export default function App() {
   const [taskItems, setTaskItems] = useState([]);
   
   const handleAddTask = () => {
+    Keyboard.dismiss();
     setTaskItems([...taskItems, task]);
     setTask('');
   };
+
+  const completeTask =(index) => {
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1)
+    setTaskItems(itemsCopy)
+  }
+
 
   return (
     <View style={styles.container}>
@@ -24,18 +32,23 @@ export default function App() {
           {/** here is Where the tasks will go */}
 
           {
-            taskItems.map((item) => (
-              <Task text={item} />
-            ))
+            taskItems.map((item, index) => {
+              return(
+                <TouchableOpacity onPress={() => completeTask()}>
+                  <Task key={index} text={item} />
+                </TouchableOpacity>
+              )
+              
+              
+            })
           }
           
-          <Task text={'Tarefa Manual'} />
+          <Task text={'Tarefa'} />
 
         </View>
       </View>
 
       {/** write a task  */}
-      <View style={{flex: 1, overflow: 'hidden'}}>
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? "padding" : "height"}
         style={styles.writeTaskWrapper}
@@ -47,7 +60,6 @@ export default function App() {
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-      </View>
       
     </View>
   );
